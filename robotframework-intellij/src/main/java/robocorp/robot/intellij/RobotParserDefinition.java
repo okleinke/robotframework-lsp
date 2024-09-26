@@ -52,22 +52,6 @@ public class RobotParserDefinition implements ParserDefinition {
 
     private static final Logger LOG = Logger.getInstance(RobotParserDefinition.class);
 
-    ILightStubFileElementType FILE = new ILightStubFileElementType(RobotFrameworkLanguage.INSTANCE) {
-        @Override
-        public FlyweightCapableTreeStructure<LighterASTNode> parseContentsLight(ASTNode chameleon) {
-            PsiElement psi = chameleon.getPsi();
-            assert psi != null : "Bad chameleon: " + chameleon;
-
-            Project project = psi.getProject();
-            PsiBuilderFactory factory = PsiBuilderFactory.getInstance();
-            PsiBuilder builder = factory.createBuilder(project, chameleon);
-            ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(getLanguage());
-            assert parserDefinition != null : this;
-            RobotParser parser = new RobotParser();
-            return parser.parseLight(this, builder);
-        }
-    };
-
     @Override
     public @NotNull Lexer createLexer(Project project) {
         return new RobotLexer();
@@ -80,7 +64,7 @@ public class RobotParserDefinition implements ParserDefinition {
 
     @Override
     public IFileElementType getFileNodeType() {
-        return FILE;
+        return RobotFileElementType.INSTANCE;
     }
 
     @Override

@@ -23,7 +23,7 @@ def main():
 
     wheel_file = os.path.join(
         os.path.dirname(curdir),
-        f"robotframework-ls/src/dist/robotframework_lsp-{__version__}-py2.py3-none-any.whl",
+        f"robotframework-ls/src/dist/robotframework_lsp-{__version__}-py3-none-any.whl",
     )
 
     target = (
